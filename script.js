@@ -61,12 +61,7 @@ function cleanObject(object) {
 function prepareObjects(objects) {
   allStudents = objects.map(prepareObject);
 
-  console.table(allStudents.sort(a));
-  function a(a, b) {
-    if (a.lastName < b.lastName) {
-      return -1;
-    }
-  }
+  console.table(allStudents);
 }
 
 function prepareObject(object) {
