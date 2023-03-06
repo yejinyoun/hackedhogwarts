@@ -34,6 +34,8 @@ function loadJSON() {
 
 function cleanObjects(objects) {
   allStudents = objects.map(cleanObject);
+
+  prepareObjects(allStudents);
 }
 
 function cleanObject(object) {
@@ -56,19 +58,43 @@ function cleanObject(object) {
   return object;
 }
 
-/* function prepareObjects(objects) {
+function prepareObjects(objects) {
   allStudents = objects.map(prepareObject);
 }
 
 function prepareObject(object) {
+  const fullname = object["fullname"];
+  const firstSpace = fullname.indexOf(" ");
+  const lastSpace = fullname.lastIndexOf(" ");
+
   const student = Object.create(Student);
 
-  const fullname = object["fullname"].trim();
-  animal.name = texts[0];
-  animal.desc = texts[2];
-  animal.type = texts[3];
-  animal.age = jsonObject.age;
+  student.firstName = fullname.substring(0, firstSpace);
+  student.middleName = undefined;
+  student.nickName = undefined;
+  student.lastName = fullname.substring(lastSpace + 1);
+  student.gender = object["gender"];
+  student.photo = "";
+  student.house = object["house"];
+  student.blood = "-default-";
+  student.prefect = false;
+  student.squad = false;
+  student.expelled = false;
 
-  return animal;
+  // if student only has first name
+  if (fullname.split(" ").length < 2) {
+    student.firstName = fullname;
+    student.lastName = undefined;
+  }
+
+  // if student has a middle name or a nick name
+  else if (fullname.split(" ").length > 2) {
+    if (fullname.includes(`"`)) {
+      student.nickName = fullname.substring(fullname.indexOf(`"`) + 1, fullname.lastIndexOf(`"`));
+    } else {
+      student.middleName = fullname.substring(firstSpace + 1, lastSpace);
+    }
+  }
+
+  console.table(student);
 }
- */
