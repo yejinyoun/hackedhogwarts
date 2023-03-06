@@ -47,7 +47,7 @@ function cleanObject(object) {
     let capitalized = string[0].toUpperCase();
 
     for (let i = 1; i < string.length; i++) {
-      if (string[i - 1] === " " || string[i - 1] === "-") {
+      if (string[i - 1] === " " || string[i - 1] === "-" || string[i - 1] === `"`) {
         capitalized += string[i].toUpperCase();
       } else {
         capitalized += string[i].toLowerCase();
@@ -60,6 +60,8 @@ function cleanObject(object) {
 
 function prepareObjects(objects) {
   allStudents = objects.map(prepareObject);
+
+  console.table(allStudents);
 }
 
 function prepareObject(object) {
