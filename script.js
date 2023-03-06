@@ -10,7 +10,7 @@ const Student = {
   nickName: undefined,
   lastName: "-default-",
   gender: "-default-",
-  photo: "-default-",
+  photo: "-default-.png",
   house: "-default-",
   blood: "-default-",
   prefect: false,
@@ -61,7 +61,12 @@ function cleanObject(object) {
 function prepareObjects(objects) {
   allStudents = objects.map(prepareObject);
 
-  console.table(allStudents);
+  console.table(allStudents.sort(a));
+  function a(a, b) {
+    if (a.lastName < b.lastName) {
+      return -1;
+    }
+  }
 }
 
 function prepareObject(object) {
@@ -76,7 +81,7 @@ function prepareObject(object) {
   student.nickName = undefined;
   student.lastName = fullname.substring(lastSpace + 1);
   student.gender = object["gender"];
-  student.photo = "";
+  student.photo = `${student.lastName.toLowerCase()}_${fullname[0].toLowerCase()}.png`;
   student.house = object["house"];
   student.blood = "-default-";
   student.prefect = false;
@@ -87,6 +92,7 @@ function prepareObject(object) {
   if (fullname.split(" ").length < 2) {
     student.firstName = fullname;
     student.lastName = undefined;
+    student.photo = undefined;
   }
 
   // if student has a middle name or a nick name
@@ -96,6 +102,13 @@ function prepareObject(object) {
     } else {
       student.middleName = fullname.substring(firstSpace + 1, lastSpace);
     }
+  }
+
+  // if student has hyphen in last name (for img)
+  else if (student.lastName.includes("-")) {
+    student.photo = `${fullname
+      .substring(fullname.indexOf("-") + 1)
+      .toLowerCase()}_${fullname[0].toLowerCase()}.png`;
   }
 
   return student;
