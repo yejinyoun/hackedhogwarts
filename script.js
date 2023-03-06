@@ -33,9 +33,9 @@ function loadJSON() {
 }
 
 function cleanObjects(objects) {
-  allStudents = objects.map(cleanObject);
+  const students = objects.map(cleanObject);
 
-  prepareObjects(allStudents);
+  prepareObjects(students);
 }
 
 function cleanObject(object) {
@@ -96,5 +96,5 @@ function prepareObject(object) {
     }
   }
 
-  console.table(student);
+  return student;
 }
