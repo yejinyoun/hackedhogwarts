@@ -15,6 +15,7 @@ const Student = {
   blood: "-default-",
   prefect: false,
   squad: false,
+  enrolled: true,
   expelled: false,
 };
 
@@ -82,6 +83,7 @@ function prepareObject(object) {
   student.blood = "-default-";
   student.prefect = false;
   student.squad = false;
+  student.enrolled = true;
   student.expelled = false;
 
   // if student only has first name
