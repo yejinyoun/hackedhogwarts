@@ -5,8 +5,58 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hacked Hogwarts Student List</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <h1>Hello, Admin</h1>
+    <p>
+      Filter:
+      <button class="filter" data-action="filter" data-filter="Gryffindor">Gryffindor</button>
+      <button class="filter" data-action="filter" data-filter="Slytherin">Slytherin</button>
+      <button class="filter" data-action="filter" data-filter="Ravenclaw">Ravenclaw</button>
+      <button class="filter" data-action="filter" data-filter="Hufflepuff">Hufflepuff</button>
+      <button class="filter" data-action="filter" data-filter="prefect">Prefects</button>
+      <button class="filter" data-action="filter" data-filter="squad">Inquisitorial Squads</button>
+      <button class="filter" data-action="filter" data-filter="enrolled">Enrolled Students</button>
+      <button class="filter" data-action="filter" data-filter="expelled">Expelled Students</button>
+      <button class="filter" data-action="filter" data-filter="*">All Students</button>
+    </p>
+
+    <hr />
+
+    <table id="list">
+      <thead>
+        <tr id="sorting">
+          <th data-action="sort" data-sort-direction="asc" data-sort="house">HOUSE</th>
+          <th data-action="sort" data-sort-direction="asc" data-sort="firstName">FIRST NAME</th>
+          <th data-action="sort" data-sort-direction="asc" data-sort="lastName">LAST NAME</th>
+          <th data-action="sort" data-sort-direction="asc" data-sort="prefect">PREFECT</th>
+          <th data-action="sort" data-sort-direction="asc" data-sort="squad">
+            INQUISITORIAL SQUAD
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- student template will be copied and inserted here -->
+      </tbody>
+    </table>
+
+    <template id="student">
+      <tr>
+        <td data-field="photo">PHOTO</td>
+        <td data-field="house">HOUSE</td>
+        <td data-field="firstName">FIRST NAME</td>
+        <td data-field="middleName">MIDDLE NAME</td>
+        <td data-field="nickName">NICK NAME</td>
+        <td data-field="lastName">LAST NAME</td>
+        <td data-field="gender">GENDER</td>
+        <td data-field="blood">BLOOD</td>
+        <td data-field="prefect">🏆</td>
+        <td data-field="squad">⭐</td>
+        <td data-field="enrolled">ENROLLED</td>
+        <td data-field="expelled">EXPELLED</td>
+      </tr>
+    </template>
     <script src="script.js"></script>
   </body>
 </html>
