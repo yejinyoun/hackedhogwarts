@@ -66,7 +66,7 @@ function prepareObjects(objects) {
   //console.table(allStudents);
   //sortList("prefect");
 
-  displayList(allStudents);
+  buildList();
 }
 
 function prepareObject(object) {
@@ -115,7 +115,25 @@ function prepareObject(object) {
   return student;
 }
 
-//function buildList() {}
+function buildList() {
+  const currentList = allStudents;
+
+  filterClicked();
+
+  function filterClicked() {
+    const buttons = document.querySelectorAll("button");
+
+    buttons.forEach(function (button) {
+      button.addEventListener("click", setFilter);
+
+      function setFilter() {
+        const filterType = button.dataset.filter;
+
+        filterList(filterType);
+      }
+    });
+  }
+}
 
 //function filterClicked() {}
 
