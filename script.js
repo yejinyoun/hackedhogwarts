@@ -62,7 +62,7 @@ function cleanObject(object) {
 function prepareObjects(objects) {
   allStudents = objects.map(prepareObject);
 
-  filterList();
+  filterList("Ravenclaw");
   //console.table(allStudents);
 }
 
@@ -118,16 +118,26 @@ function prepareObject(object) {
 
 //function setFilter() {}
 
-function filterList() {
-  const list = allStudents.filter(isGryffindor);
+function filterList(type) {
+  const filteredList = allStudents.filter(filterBy);
 
-  function isGryffindor(student) {
-    if (student.house === "Gryffindor") {
-      return true;
+  // filter by boolean(true) or string(house type)
+
+  function filterBy(student) {
+    if (typeof student[type] === "boolean") {
+      if (student[type] === true) {
+        return true;
+      } else {
+        return false;
+      }
     } else {
-      return false;
+      if (student.house === type) {
+        return true;
+      } else {
+        return false;
+      }
     }
   }
 
-  console.log(list);
+  console.log(filteredList);
 }
