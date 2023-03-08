@@ -64,8 +64,9 @@ function prepareObjects(objects) {
 
   //filterList("Ravenclaw");
   //console.table(allStudents);
+  //sortList("prefect");
 
-  sortList("prefect");
+  displayList(allStudents);
 }
 
 function prepareObject(object) {
@@ -170,4 +171,35 @@ function sortList(type) {
   }
 
   console.log(sortedList);
+}
+
+function displayList(list) {
+  // clear the list
+  document.querySelector("#list tbody").innerHTML = "";
+
+  // build a new list
+  list.forEach(displayStudent);
+}
+
+function displayStudent(student) {
+  // create clone
+  const clone = document.querySelector("template#student").content.cloneNode(true);
+
+  // set clone data
+
+  clone.querySelector("[data-field=photo]").textContent = "photo here";
+  clone.querySelector("[data-field=house]").textContent = student.house;
+  clone.querySelector("[data-field=firstName]").textContent = student.firstName;
+  clone.querySelector("[data-field=middleName]").textContent = student.middleName;
+  clone.querySelector("[data-field=nickName]").textContent = student.nickName;
+  clone.querySelector("[data-field=lastName]").textContent = student.lastName;
+  clone.querySelector("[data-field=gender]").textContent = student.gender;
+  clone.querySelector("[data-field=blood]").textContent = student.blood;
+  clone.querySelector("[data-field=prefect]").textContent = `${student.prefect}`;
+  clone.querySelector("[data-field=squad]").textContent = `${student.squad}`;
+  clone.querySelector("[data-field=enrolled]").textContent = `${student.enrolled}`;
+  clone.querySelector("[data-field=expelled]").textContent = `${student.expelled}`;
+
+  // append clone to list
+  document.querySelector("#list tbody").appendChild(clone);
 }
