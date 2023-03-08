@@ -62,8 +62,10 @@ function cleanObject(object) {
 function prepareObjects(objects) {
   allStudents = objects.map(prepareObject);
 
-  filterList("Ravenclaw");
+  //filterList("Ravenclaw");
   //console.table(allStudents);
+
+  sortList("prefect");
 }
 
 function prepareObject(object) {
@@ -140,4 +142,32 @@ function filterList(type) {
   }
 
   console.log(filteredList);
+}
+
+//function sortClicked() {}
+
+//function setSort() {}
+
+function sortList(type) {
+  const sortedList = allStudents.sort(sortBy);
+
+  // sort by boolean(prefect, inq squad) or string(first name, last name, house)
+
+  function sortBy(student1, student2) {
+    if (typeof student1[type] === "boolean") {
+      if (student1[type] === true) {
+        return -1;
+      } else {
+        return 1;
+      }
+    } else {
+      if (student1[type] < student2[type]) {
+        return -1;
+      } else {
+        return 1;
+      }
+    }
+  }
+
+  console.log(sortedList);
 }
