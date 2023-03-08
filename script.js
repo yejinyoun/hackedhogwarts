@@ -61,7 +61,8 @@ function cleanObject(object) {
 function prepareObjects(objects) {
   allStudents = objects.map(prepareObject);
 
-  console.table(allStudents);
+  filterList();
+  //console.table(allStudents);
 }
 
 function prepareObject(object) {
@@ -107,4 +108,24 @@ function prepareObject(object) {
   }
 
   return student;
+}
+
+//function buildList() {}
+
+//function filterClicked() {}
+
+//function setFilter() {}
+
+function filterList() {
+  const list = allStudents.filter(isGryffindor);
+
+  function isGryffindor(student) {
+    if (student.house === "Gryffindor") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  console.log(list);
 }
