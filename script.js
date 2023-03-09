@@ -66,7 +66,7 @@ function prepareObjects(objects) {
   //console.table(allStudents);
   //sortList("prefect");
 
-  buildList();
+  displayList(allStudents);
 }
 
 function prepareObject(object) {
@@ -115,27 +115,7 @@ function prepareObject(object) {
   return student;
 }
 
-function buildList() {
-  const currentList = allStudents;
-
-  filterClicked();
-
-  function filterClicked() {
-    const buttons = document.querySelectorAll("button");
-
-    buttons.forEach(function (button) {
-      button.addEventListener("click", setFilter);
-
-      function setFilter() {
-        const filterType = button.dataset.filter;
-
-        filterList(filterType);
-      }
-    });
-  }
-}
-
-//function filterClicked() {}
+// function setButton(){}
 
 //function setFilter() {}
 
@@ -160,10 +140,8 @@ function filterList(type) {
     }
   }
 
-  console.log(filteredList);
+  displayList(filteredList);
 }
-
-//function sortClicked() {}
 
 //function setSort() {}
 
@@ -188,7 +166,7 @@ function sortList(type) {
     }
   }
 
-  console.log(sortedList);
+  displayList(sortedList);
 }
 
 function displayList(list) {
