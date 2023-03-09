@@ -181,22 +181,24 @@ function selectSort(event) {
 
 function setSort(sort) {
   settings.sortType = sort;
+
+  loadList();
 }
 
-function sortList(type) {
-  const sortedList = allStudents.sort(sortBy);
+function sortList(list) {
+  const sortedList = list.sort(sortBy);
 
   // sort by boolean(prefect, inq squad) or string(first name, last name, house)
 
   function sortBy(student1, student2) {
-    if (typeof student1[type] === "boolean") {
-      if (student1[type] === true) {
+    if (typeof student1[settings.sortType] === "boolean") {
+      if (student1[settings.sortType] === true) {
         return -1;
       } else {
         return 1;
       }
     } else {
-      if (student1[type] < student2[type]) {
+      if (student1[settings.sortType] < student2[settings.sortType]) {
         return -1;
       } else {
         return 1;
@@ -204,14 +206,14 @@ function sortList(type) {
     }
   }
 
-  displayList(sortedList);
+  return sortedList;
 }
 
 function loadList() {
   const filteredList = filterList();
   const sortedList = sortList(filteredList);
 
-  displayList(filteredList);
+  displayList(sortedList);
 }
 
 function displayList(list) {
