@@ -141,25 +141,27 @@ function selectFilter(event) {
 
 function setFilter(filter) {
   settings.filterType = filter;
+
+  loadList();
 }
 
-function filterList(type) {
+function filterList() {
   let filteredList = allStudents;
 
-  if (type !== "*") {
+  if (settings.filterType !== "*") {
     filteredList = allStudents.filter(filterBy);
 
     // filter by boolean(true) or string(house type)
 
     function filterBy(student) {
-      if (typeof student[type] === "boolean") {
-        if (student[type] === true) {
+      if (typeof student[settings.filterType] === "boolean") {
+        if (student[settings.filterType] === true) {
           return true;
         } else {
           return false;
         }
       } else {
-        if (student.house === type) {
+        if (student.house === settings.filterType) {
           return true;
         } else {
           return false;
@@ -168,7 +170,7 @@ function filterList(type) {
     }
   }
 
-  displayList(filteredList);
+  return filteredList;
 }
 
 function selectSort(event) {
@@ -203,6 +205,13 @@ function sortList(type) {
   }
 
   displayList(sortedList);
+}
+
+function loadList() {
+  const filteredList = filterList();
+  const sortedList = sortList(filteredList);
+
+  displayList(filteredList);
 }
 
 function displayList(list) {
