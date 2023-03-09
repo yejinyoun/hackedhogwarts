@@ -117,8 +117,14 @@ function prepareObject(object) {
 }
 
 function setButton() {
+  // filter button
   document.querySelectorAll("[data-action='filter']").forEach(function (button) {
     button.addEventListener("click", setFilter);
+  });
+
+  // sort button
+  document.querySelectorAll("[data-action='sort']").forEach(function (button) {
+    button.addEventListener("click", setSort);
   });
 }
 
@@ -156,7 +162,11 @@ function filterList(type) {
   displayList(filteredList);
 }
 
-//function setSort() {}
+function setSort(event) {
+  const sort = event.target.dataset.sort;
+
+  sortList(sort);
+}
 
 function sortList(type) {
   const sortedList = allStudents.sort(sortBy);
