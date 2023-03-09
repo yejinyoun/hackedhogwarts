@@ -4,6 +4,11 @@ window.addEventListener("DOMContentLoaded", start);
 
 let allStudents = [];
 
+const settings = {
+  filterType: "*",
+  sortType: "",
+};
+
 const Student = {
   firstName: "-default-",
   middleName: undefined,
@@ -119,19 +124,23 @@ function prepareObject(object) {
 function setButton() {
   // filter button
   document.querySelectorAll("[data-action='filter']").forEach(function (button) {
-    button.addEventListener("click", setFilter);
+    button.addEventListener("click", selectFilter);
   });
 
   // sort button
   document.querySelectorAll("[data-action='sort']").forEach(function (button) {
-    button.addEventListener("click", setSort);
+    button.addEventListener("click", selectSort);
   });
 }
 
-function setFilter(event) {
+function selectFilter(event) {
   const filter = event.target.dataset.filter;
 
-  filterList(filter);
+  setFilter(filter);
+}
+
+function setFilter(filter) {
+  settings.filterType = filter;
 }
 
 function filterList(type) {
@@ -162,10 +171,14 @@ function filterList(type) {
   displayList(filteredList);
 }
 
-function setSort(event) {
+function selectSort(event) {
   const sort = event.target.dataset.sort;
 
-  sortList(sort);
+  setSort(sort);
+}
+
+function setSort(sort) {
+  settings.sortType = sort;
 }
 
 function sortList(type) {
