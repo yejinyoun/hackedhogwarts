@@ -22,6 +22,7 @@ const Student = {
 function start() {
   console.log("start");
   loadJSON();
+  setButton();
 }
 
 function loadJSON() {
@@ -115,9 +116,17 @@ function prepareObject(object) {
   return student;
 }
 
-// function setButton(){}
+function setButton() {
+  document.querySelectorAll("[data-action='filter']").forEach(function (button) {
+    button.addEventListener("click", setFilter);
+  });
+}
 
-//function setFilter() {}
+function setFilter(event) {
+  const filter = event.target.dataset.filter;
+
+  filterList(filter);
+}
 
 function filterList(type) {
   let filteredList = allStudents;
