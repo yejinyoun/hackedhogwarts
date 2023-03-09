@@ -120,22 +120,26 @@ function prepareObject(object) {
 //function setFilter() {}
 
 function filterList(type) {
-  const filteredList = allStudents.filter(filterBy);
+  let filteredList = allStudents;
 
-  // filter by boolean(true) or string(house type)
+  if (type !== "*") {
+    filteredList = allStudents.filter(filterBy);
 
-  function filterBy(student) {
-    if (typeof student[type] === "boolean") {
-      if (student[type] === true) {
-        return true;
+    // filter by boolean(true) or string(house type)
+
+    function filterBy(student) {
+      if (typeof student[type] === "boolean") {
+        if (student[type] === true) {
+          return true;
+        } else {
+          return false;
+        }
       } else {
-        return false;
-      }
-    } else {
-      if (student.house === type) {
-        return true;
-      } else {
-        return false;
+        if (student.house === type) {
+          return true;
+        } else {
+          return false;
+        }
       }
     }
   }
