@@ -252,13 +252,9 @@ function displayStudent(student) {
   clone.querySelector("[data-field=lastName]").textContent = student.lastName;
   clone.querySelector("[data-field=gender]").textContent = student.gender;
   clone.querySelector("[data-field=blood]").textContent = student.blood;
-  clone.querySelector("[data-field=prefect]").textContent = `${student.prefect}`;
   clone.querySelector("[data-field=squad]").textContent = `${student.squad}`;
-  clone.querySelector("[data-field=enrolled]").textContent = `${student.enrolled}`;
-  clone.querySelector("[data-field=expelled]").textContent = `${student.expelled}`;
 
-  // expel/enroll status
-
+  // set expel/enroll status
   if (student.expelled == false) {
     clone.querySelector("[data-field=enrolled]").textContent = `Enrolled`;
     clone.querySelector("[data-field=expelled]").textContent = ``;
@@ -281,9 +277,62 @@ function displayStudent(student) {
     if (student.expelled == false) {
       student.enrolled = false;
       student.expelled = true;
+      student.prefect = false;
     } else {
       student.enrolled = true;
       student.expelled = false;
+    }
+
+    loadList();
+  }
+
+  // set prefect status
+  if (student.prefect == false) {
+    clone.querySelector("[data-field=prefect]").textContent = ``;
+
+    //select prefect button
+    clone.querySelector("[data-field=setprefect] button").textContent = `SELECT PREFECT`;
+  } else {
+    clone.querySelector("[data-field=prefect]").textContent = `${student.house} Prefect`;
+
+    // remove prefect button button
+    clone.querySelector("[data-field=setprefect] button").textContent = `REMOVE PREFECT`;
+    clone.querySelector("[data-field=setprefect] button").style.backgroundColor = "#FFFF00";
+  }
+
+  // chage prefect status (set/remove)
+  clone.querySelector("[data-field=setprefect]").addEventListener("click", setPrefect);
+
+  function setPrefect() {
+    if (student.prefect == true) {
+      student.prefect = false;
+    } else {
+      student.prefect = checkPrefect(student);
+    }
+
+    // check prefect availability
+    function checkPrefect(student) {
+      const housePrefects = allStudents.filter(isPrefect).filter(isHousePrefect);
+
+      function isPrefect(aStudent) {
+        return aStudent.prefect === true;
+      }
+
+      function isHousePrefect(aPrefect) {
+        return aPrefect.house == student.house;
+      }
+
+      // 1. should be an enrolled student
+      if (student.expelled === true) {
+        return false;
+      } else {
+        // 2. max 2 students can be prefects in each house
+        if (housePrefects.length < 2) {
+          return true;
+        } else {
+          return false;
+        }
+      }
     }
 
     loadList();
