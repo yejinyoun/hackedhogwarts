@@ -95,7 +95,7 @@ function prepareObject(object) {
   if (fullname.split(" ").length < 2) {
     student.firstName = fullname;
     student.lastName = undefined;
-    student.photo = undefined;
+    student.photo = `undefined.png`;
   }
 
   // if student has a middle name or a nick name
