@@ -257,6 +257,37 @@ function displayStudent(student) {
   clone.querySelector("[data-field=enrolled]").textContent = `${student.enrolled}`;
   clone.querySelector("[data-field=expelled]").textContent = `${student.expelled}`;
 
-  // append clone to list
+  // expel/enroll status
+
+  if (student.expelled == false) {
+    clone.querySelector("[data-field=enrolled]").textContent = `Enrolled`;
+    clone.querySelector("[data-field=expelled]").textContent = ``;
+
+    //expel button
+    clone.querySelector("[data-field=status] button").textContent = `EXPEL`;
+  } else {
+    clone.querySelector("[data-field=enrolled]").textContent = ``;
+    clone.querySelector("[data-field=expelled]").textContent = `Expelled`;
+
+    // re-enroll button
+    clone.querySelector("[data-field=status] button").textContent = `RE-ENROLL`;
+    clone.querySelector("[data-field=status] button").style.backgroundColor = "#4CAF50";
+  }
+
+  // change status (expel)
+  clone.querySelector("[data-field=status]").addEventListener("click", changeStatus);
+
+  function changeStatus() {
+    if (student.expelled == false) {
+      student.enrolled = false;
+      student.expelled = true;
+    } else {
+      student.enrolled = true;
+      student.expelled = false;
+    }
+
+    loadList();
+  }
+
   document.querySelector("#list tbody").appendChild(clone);
 }

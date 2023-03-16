@@ -24,6 +24,10 @@ body {
   border: solid black 2px;
 }
 
-#list tbody tr:nth-child(odd) td {
+#list tbody tr:nth-child(odd) {
   background-color: lavenderblush;
+}
+
+#list tbody td[data-field="status"] button {
+  background-color: red;
 }
