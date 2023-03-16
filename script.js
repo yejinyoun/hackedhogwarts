@@ -68,10 +68,6 @@ function cleanObject(object) {
 function prepareObjects(objects) {
   allStudents = objects.map(prepareObject);
 
-  //filterList("Ravenclaw");
-  //console.table(allStudents);
-  //sortList("prefect");
-
   displayList(allStudents);
 }
 
@@ -116,6 +112,11 @@ function prepareObject(object) {
     student.photo = `${fullname
       .substring(fullname.indexOf("-") + 1)
       .toLowerCase()}_${fullname[0].toLowerCase()}.png`;
+  }
+
+  // if it's padma or parvati patil (for img)
+  else if (student.lastName == "Patil") {
+    student.photo = `${student.lastName.toLowerCase()}_${student.firstName}.png`;
   }
 
   return student;
