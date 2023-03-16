@@ -230,7 +230,7 @@ function displayStudent(student) {
 
   // set clone data
 
-  clone.querySelector("[data-field=photo]").textContent = "photo here";
+  clone.querySelector("[data-field=photo]").innerHTML = `<img src="img/${student.photo}">`;
   clone.querySelector("[data-field=house]").textContent = student.house;
   clone.querySelector("[data-field=firstName]").textContent = student.firstName;
   clone.querySelector("[data-field=middleName]").textContent = student.middleName;
