@@ -137,6 +137,12 @@ function setButton() {
 function selectFilter(event) {
   const filter = event.target.dataset.filter;
 
+  // remove old selected class
+  document.querySelector(`[data-filter='${settings.filterType}']`).classList.remove("selected");
+
+  // add class of selected
+  event.target.classList.add("selected");
+
   setFilter(filter);
 }
 
@@ -176,6 +182,13 @@ function filterList() {
 
 function selectSort(event) {
   const sort = event.target.dataset.sort;
+
+  if (settings.sortType !== "") {
+    // remove old selected class
+    document.querySelector(`[data-sort='${settings.sortType}']`).classList.remove("selected");
+  }
+  // add class of selected
+  event.target.classList.add("selected");
 
   setSort(sort);
 }

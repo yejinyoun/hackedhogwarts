@@ -11,6 +11,10 @@ body {
   cursor: pointer;
 }
 
+.selected {
+  text-decoration: underline;
+}
+
 #list {
   border-collapse: collapse;
 }
