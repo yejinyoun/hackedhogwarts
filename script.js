@@ -9,6 +9,7 @@ let bloodStatus = {};
 const settings = {
   filterType: "*",
   sortType: "",
+  hacked: false,
 };
 
 const Student = {
@@ -444,21 +445,42 @@ function displayStudent(student) {
     });
   }
 
-  // HACKTHESYSTEM can't expel me
+  // HACKTHESYSTEM ON
 
-  if (student.firstName === "Yejin") {
-    clone.querySelector("[data-field=status] button").addEventListener("click", cantExpel);
+  if (settings.hacked == true) {
+    //can't expel me
+    if (student.firstName === "Yejin") {
+      clone.querySelector("[data-field=status] button").addEventListener("click", cantExpel);
 
-    function cantExpel() {
-      student.enrolled = true;
-      student.expelled = false;
+      function cantExpel() {
+        student.enrolled = true;
+        student.expelled = false;
 
-      document.querySelector("#modal").classList.remove("hidden");
-      document.querySelector("#modal h2").textContent = "You Can't Expel This Student!";
-      document.querySelector("#modal p").textContent = "Please don't ever dare.";
+        document.querySelector("#modal").classList.remove("hidden");
+        document.querySelector("#modal h2").textContent = "You Can't Expel This Student!";
+        document.querySelector("#modal p").textContent = "Please don't ever dare.";
 
-      closeModal();
+        closeModal();
+        loadList();
+      }
+    }
+
+    //can't select inquisitorial squad
+    clone.querySelector("[data-field=setsquad] button").addEventListener("click", cantSquad);
+
+    function cantSquad() {
+      student.squad = true;
       loadList();
+
+      setTimeout(function removeSquad() {
+        document.querySelector("#modal").classList.remove("hidden");
+        document.querySelector("#modal h2").textContent = "Uh oh! Something went wrong...";
+        document.querySelector("#modal p").textContent = "Please try again.";
+        closeModal();
+
+        student.squad = false;
+        loadList();
+      }, 1000);
     }
   }
 
@@ -466,6 +488,8 @@ function displayStudent(student) {
 }
 
 function hackTheSystem() {
+  settings.hacked = true;
+
   allStudents.push(injectMe());
   allStudents.forEach(messBlood);
 
