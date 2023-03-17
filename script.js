@@ -132,6 +132,28 @@ function setButton() {
   document.querySelectorAll("[data-action='sort']").forEach(function (button) {
     button.addEventListener("click", selectSort);
   });
+
+  //search button
+  document.querySelector("#search").addEventListener("input", searchList);
+}
+
+function searchList() {
+  const searchTerm = document.querySelector("#search").value.toLowerCase();
+  const searchedList = allStudents.filter(isSearched);
+
+  function isSearched(student) {
+    if (student.lastName == undefined) {
+      const fullName = `${student.firstName}`.toLowerCase();
+
+      return fullName.includes(searchTerm);
+    } else {
+      const fullName = `${student.firstName} ${student.lastName}`.toLowerCase();
+
+      return fullName.includes(searchTerm);
+    }
+  }
+
+  displayList(searchedList);
 }
 
 function selectFilter(event) {
