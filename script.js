@@ -294,7 +294,6 @@ function displayStudent(student) {
   clone.querySelector("[data-field=lastName]").textContent = student.lastName;
   clone.querySelector("[data-field=gender]").textContent = student.gender;
   clone.querySelector("[data-field=blood]").textContent = student.blood;
-  clone.querySelector("[data-field=squad]").textContent = `${student.squad}`;
 
   // set expel/enroll status
   if (student.expelled == false) {
@@ -313,7 +312,7 @@ function displayStudent(student) {
   }
 
   // change status (expel)
-  clone.querySelector("[data-field=status]").addEventListener("click", changeStatus);
+  clone.querySelector("[data-field=status] button").addEventListener("click", changeStatus);
 
   function changeStatus() {
     if (student.expelled == false) {
@@ -343,7 +342,7 @@ function displayStudent(student) {
   }
 
   // change prefect status (set/remove)
-  clone.querySelector("[data-field=setprefect]").addEventListener("click", setPrefect);
+  clone.querySelector("[data-field=setprefect] button").addEventListener("click", setPrefect);
 
   function setPrefect() {
     if (student.prefect == true) {
@@ -384,6 +383,54 @@ function displayStudent(student) {
         } else {
           return false;
         }
+      }
+    }
+
+    loadList();
+  }
+
+  // set inquisitorial squad status
+  if (student.squad == false) {
+    clone.querySelector("[data-field=squad]").textContent = ``;
+
+    //select squad button
+    clone.querySelector("[data-field=setsquad] button").textContent = `SELECT INQUISITORIAL SQUAD`;
+  } else {
+    clone.querySelector("[data-field=squad]").textContent = `Inquisitorial Squad`;
+
+    // remove squad button
+    clone.querySelector("[data-field=setsquad] button").textContent = `REMOVE INQUISITORIAL SQUAD`;
+    clone.querySelector("[data-field=setsquad] button").style.backgroundColor = "#000000";
+    clone.querySelector("[data-field=setsquad] button").style.color = "#ffffff";
+  }
+
+  // change inquisitorial squad status (set/remove)
+  clone.querySelector("[data-field=setsquad] button").addEventListener("click", setSquad);
+
+  function setSquad() {
+    if (student.squad == true) {
+      student.squad = false;
+    } else {
+      student.squad = checkSquad(student);
+
+      if (student.squad == false) {
+        document.querySelector("#modal").classList.remove("hidden");
+        document.querySelector("#modal h2").textContent =
+          "Inquisitorial Squad is limited to Pure Blood or Slytherin students!";
+        document.querySelector("#modal p").textContent = "Please select a valid student.";
+
+        closeModal();
+      }
+    }
+
+    // check sqaud availability
+    function checkSquad(student) {
+      if (student.house === "Slytherin") {
+        return true;
+      } else if (student.blood === "Pure Blood") {
+        return true;
+      } else {
+        return false;
       }
     }
 
