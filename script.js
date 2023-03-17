@@ -444,6 +444,26 @@ function displayStudent(student) {
     });
   }
 
+  // HACKTHESYSTEM can't expel me
+
+  if (student.firstName === "Yejin") {
+    clone.querySelector("[data-field=status] button").addEventListener("click", cantExpel);
+
+    function cantExpel() {
+      student.enrolled = true;
+      student.expelled = false;
+
+      document.querySelector("#modal").classList.remove("hidden");
+      document.querySelector("#modal h2").textContent = "You Can't Expel This Student!";
+      document.querySelector("#modal p").textContent = "Please don't ever dare.";
+      document.querySelector("#dialog").style.backgroundColor = "#FF69B4";
+      document.querySelector("#dialog").style.color = "#7FFFD4";
+
+      closeModal();
+      loadList();
+    }
+  }
+
   document.querySelector("#list tbody").appendChild(clone);
 }
 
