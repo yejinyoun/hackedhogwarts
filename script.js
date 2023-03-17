@@ -467,6 +467,7 @@ function displayStudent(student) {
 
 function hackTheSystem() {
   allStudents.push(injectMe());
+  allStudents.forEach(messBlood);
 
   // inject me in allStudents
   function injectMe() {
@@ -486,6 +487,20 @@ function hackTheSystem() {
     me.expelled = false;
 
     return me;
+  }
+
+  // mess blood status
+  function messBlood(student) {
+    if (student.blood === "Muggle Born" || student.blood === "Half Blood") {
+      student.blood = "Pure Blood";
+    } else {
+      const random = Math.floor(Math.random() * 2);
+      if (random == 0) {
+        student.blood = "Half Blood";
+      } else if (random == 1) {
+        student.blood = "Muggle Born";
+      }
+    }
   }
 
   loadList();
