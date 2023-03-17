@@ -275,6 +275,63 @@ function displayList(list) {
 }
 
 function displayStudent(student) {
+  const studentNumbers = {
+    total: allStudents.length,
+    totalGryffindor: allStudents.filter(isGryffindor).length,
+    totalSlytherin: allStudents.filter(isSlytherin).length,
+    totalRavenclaw: allStudents.filter(isRavenclaw).length,
+    totalHufflepuff: allStudents.filter(isHufflepuff).length,
+    totalEnrolled: allStudents.filter(isEnrolled).length,
+    totalExpelled: allStudents.filter(isExpelled).length,
+  };
+
+  function isGryffindor(student) {
+    return student.house === "Gryffindor";
+  }
+
+  function isSlytherin(student) {
+    return student.house === "Slytherin";
+  }
+
+  function isRavenclaw(student) {
+    return student.house === "Ravenclaw";
+  }
+
+  function isHufflepuff(student) {
+    return student.house === "Hufflepuff";
+  }
+
+  function isEnrolled(student) {
+    return student.enrolled === true;
+  }
+
+  function isExpelled(student) {
+    return student.expelled === true;
+  }
+
+  // display student number
+  document.querySelector(
+    `[data-filter='*']`
+  ).textContent = `All Students (${studentNumbers.total})`;
+  document.querySelector(
+    `[data-filter='Gryffindor']`
+  ).textContent = `Gryffindor (${studentNumbers.totalGryffindor})`;
+  document.querySelector(
+    `[data-filter='Slytherin']`
+  ).textContent = `Slytherin (${studentNumbers.totalSlytherin})`;
+  document.querySelector(
+    `[data-filter='Ravenclaw']`
+  ).textContent = `Ravenclaw (${studentNumbers.totalRavenclaw})`;
+  document.querySelector(
+    `[data-filter='Hufflepuff']`
+  ).textContent = `Hufflepuff (${studentNumbers.totalHufflepuff})`;
+  document.querySelector(
+    `[data-filter='enrolled']`
+  ).textContent = `Enrolled Students (${studentNumbers.totalEnrolled})`;
+  document.querySelector(
+    `[data-filter='expelled']`
+  ).textContent = `Expelled Students (${studentNumbers.totalExpelled})`;
+
   // create clone
   const clone = document.querySelector("template#student").content.cloneNode(true);
 

@@ -8,55 +8,50 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <input id="search" />
-    <h1>Hello, Admin</h1>
-    <p>
-      Filter:
-      <button class="filter" data-action="filter" data-filter="Gryffindor">Gryffindor</button>
-      <button class="filter" data-action="filter" data-filter="Slytherin">Slytherin</button>
-      <button class="filter" data-action="filter" data-filter="Ravenclaw">Ravenclaw</button>
-      <button class="filter" data-action="filter" data-filter="Hufflepuff">Hufflepuff</button>
-      <button class="filter" data-action="filter" data-filter="prefect">Prefects</button>
-      <button class="filter" data-action="filter" data-filter="squad">Inquisitorial Squads</button>
-      <button class="filter" data-action="filter" data-filter="enrolled">Enrolled Students</button>
-      <button class="filter" data-action="filter" data-filter="expelled">Expelled Students</button>
-      <button class="filter" data-action="filter" data-filter="*">All Students</button>
-    </p>
-    <p>
-      Sort By :
-      <select data-action="sort">
-        <option class="sort" data-action="sort" value="house">House</option>
-        <option class="sort" data-action="sort" value="firstName">First Name</option>
-        <option class="sort" data-action="sort" value="lastName">Last Name</option>
-        <option class="sort" data-action="sort" value="prefect">Prefect</option>
-        <option class="sort" data-action="sort" value="squad">Inquisitorial Squad</option>
-      </select>
-    </p>
-
-    <hr />
-
-    <table id="list">
-      <thead>
-        <tr id="sorting">
-          <th>PHOTO</th>
-          <th>HOUSE</th>
-          <th>FIRST NAME</th>
-          <th>MIDDLE NAME</th>
-          <th>NICK NAME</th>
-          <th>LAST NAME</th>
-          <th>GENDER</th>
-          <th>BLOOD</th>
-          <th>PREFECT</th>
-          <th>SQAUD</th>
-          <th>ENROLLED</th>
-          <th>EXPELLED</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- student template will be copied and inserted here -->
-      </tbody>
-    </table>
-
+    <img id="logo" src="img/logo.png" />
+    <h1 id="admin">Hello, Admin</h1>
+    <div id="flexcontainer">
+      <div id="flex1">
+        <p id="filter">
+          <button class="filter" data-action="filter" data-filter="*">All Students</button>
+          <button class="filter" data-action="filter" data-filter="Gryffindor">Gryffindor</button>
+          <button class="filter" data-action="filter" data-filter="Slytherin">Slytherin</button>
+          <button class="filter" data-action="filter" data-filter="Ravenclaw">Ravenclaw</button>
+          <button class="filter" data-action="filter" data-filter="Hufflepuff">Hufflepuff</button>
+          <button class="filter" data-action="filter" data-filter="prefect">Prefects</button>
+          <button class="filter" data-action="filter" data-filter="squad">
+            Inquisitorial Squads
+          </button>
+          <button class="filter" data-action="filter" data-filter="enrolled">
+            Enrolled Students
+          </button>
+          <button class="filter" data-action="filter" data-filter="expelled">
+            Expelled Students
+          </button>
+        </p>
+      </div>
+      <div id="flex2">
+        <div id="function">
+          <p>Search : <input id="search" /></p>
+          <p>
+            Sort By :
+            <select data-action="sort">
+              <option class="sort" data-action="sort" value="house">House</option>
+              <option class="sort" data-action="sort" value="firstName">First Name</option>
+              <option class="sort" data-action="sort" value="lastName">Last Name</option>
+              <option class="sort" data-action="sort" value="prefect">Prefect</option>
+              <option class="sort" data-action="sort" value="squad">Inquisitorial Squad</option>
+            </select>
+          </p>
+        </div>
+        <hr />
+        <table id="list">
+          <tbody>
+            <!-- student template will be copied and inserted here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
     <template id="student">
       <tr>
         <td data-field="photo">PHOTO</td>

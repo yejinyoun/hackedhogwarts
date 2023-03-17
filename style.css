@@ -3,6 +3,14 @@
   src: url("src/font.otf");
 }
 
+button {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  font-size: 1.2em;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -22,8 +30,7 @@ body {
 }
 
 #list tbody tr td {
-  padding: 15px;
-  border: solid black 2px;
+  padding: 0px;
 }
 
 #list tbody tr:nth-child(odd) {
@@ -72,8 +79,52 @@ body {
 
 /* search */
 
-#search {
+/* #search {
   position: absolute;
   top: 2em;
   right: 2em;
+}
+ */
+/* flex */
+
+#flexcontainer {
+  display: flex;
+  flex-direction: row;
+}
+
+#flex2 {
+  width: 70vw;
+}
+
+/* filter sidebar */
+
+#filter {
+  width: 15vw;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  background-color: lightgray;
+  border-radius: 20px;
+  padding: 1em;
+  margin: 10px;
+}
+
+.selected {
+  text-decoration: underline;
+}
+
+#logo {
+  display: block;
+  margin: 0 auto;
+  margin-top: 1em;
+}
+
+#admin {
+  margin-left: 1em;
+}
+
+#function {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
