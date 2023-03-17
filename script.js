@@ -4,6 +4,8 @@ window.addEventListener("DOMContentLoaded", start);
 
 let allStudents = [];
 
+let bloodStatus = {};
+
 const settings = {
   filterType: "*",
   sortType: "",
@@ -31,6 +33,13 @@ function start() {
 }
 
 function loadJSON() {
+  fetch("https://petlatkea.dk/2021/hogwarts/families.json")
+    .then((response) => response.json())
+    .then((jsonData) => {
+      // when loaded, set bloodStatus
+      bloodStatus = jsonData;
+    });
+
   fetch("https://petlatkea.dk/2021/hogwarts/students.json")
     .then((response) => response.json())
     .then((jsonData) => {
@@ -85,7 +94,7 @@ function prepareObject(object) {
   student.gender = object["gender"];
   student.photo = `${student.lastName.toLowerCase()}_${fullname[0].toLowerCase()}.png`;
   student.house = object["house"];
-  student.blood = "-default-";
+  student.blood = checkBlood(student.lastName);
   student.prefect = false;
   student.squad = false;
   student.enrolled = true;
@@ -117,6 +126,17 @@ function prepareObject(object) {
   // if it's padma or parvati patil (for img)
   else if (student.lastName == "Patil") {
     student.photo = `${student.lastName.toLowerCase()}_${student.firstName}.png`;
+  }
+
+  // check blood status
+  function checkBlood(familyName) {
+    if (bloodStatus["half"].includes(familyName)) {
+      return "Half Blood";
+    } else if (bloodStatus["pure"].includes(familyName)) {
+      return "Pure Blood";
+    } else {
+      return "Muggle Born";
+    }
   }
 
   return student;
