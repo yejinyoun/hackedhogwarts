@@ -300,7 +300,7 @@ function displayStudent(student) {
     clone.querySelector("[data-field=setprefect] button").style.backgroundColor = "#FFFF00";
   }
 
-  // chage prefect status (set/remove)
+  // change prefect status (set/remove)
   clone.querySelector("[data-field=setprefect]").addEventListener("click", setPrefect);
 
   function setPrefect() {
@@ -308,6 +308,16 @@ function displayStudent(student) {
       student.prefect = false;
     } else {
       student.prefect = checkPrefect(student);
+
+      if (student.prefect === false) {
+        document.querySelector("#modal").classList.remove("hidden");
+        document.querySelector("#modal h2").textContent =
+          "You have already selected two prefects for this house!";
+        document.querySelector("#modal p").textContent =
+          "Please remove a selection before adding another.";
+
+        closeModal();
+      }
     }
 
     // check prefect availability
@@ -336,6 +346,13 @@ function displayStudent(student) {
     }
 
     loadList();
+  }
+
+  // close pop-up modal
+  function closeModal() {
+    document.querySelector("#close").addEventListener("click", function addHidden() {
+      document.querySelector("#modal").classList.add("hidden");
+    });
   }
 
   document.querySelector("#list tbody").appendChild(clone);
