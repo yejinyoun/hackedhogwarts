@@ -446,3 +446,29 @@ function displayStudent(student) {
 
   document.querySelector("#list tbody").appendChild(clone);
 }
+
+function hackTheSystem() {
+  allStudents.push(injectMe());
+
+  // inject me in allStudents
+  function injectMe() {
+    const me = Object.create(Student);
+
+    me.firstName = "Yejin";
+    me.middleName = "Dumbledore";
+    me.nickName = "Fangirl";
+    me.lastName = "Youn";
+    me.gender = "Girl";
+    me.photo = "me.png";
+    me.house = "Hufflepuff";
+    me.blood = "Muggle Born";
+    me.prefect = false;
+    me.squad = false;
+    me.enrolled = true;
+    me.expelled = false;
+
+    return me;
+  }
+
+  loadList();
+}
