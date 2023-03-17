@@ -150,8 +150,8 @@ function setButton() {
   });
 
   // sort button
-  document.querySelectorAll("[data-action='sort']").forEach(function (button) {
-    button.addEventListener("click", selectSort);
+  document.querySelectorAll('select[data-action="sort"]').forEach(function (button) {
+    button.addEventListener("change", selectSort);
   });
 
   //search button
@@ -224,14 +224,7 @@ function filterList() {
 }
 
 function selectSort(event) {
-  const sort = event.target.dataset.sort;
-
-  if (settings.sortType !== "") {
-    // remove old selected class
-    document.querySelector(`[data-sort='${settings.sortType}']`).classList.remove("selected");
-  }
-  // add class of selected
-  event.target.classList.add("selected");
+  const sort = event.target.value;
 
   setSort(sort);
 }
