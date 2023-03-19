@@ -34,7 +34,8 @@ body {
 }
 
 #list tbody tr:nth-child(odd) {
-  background-color: lavenderblush;
+  border-bottom: solid 1px lightgray;
+  border-top: solid 1px lightgray;
 }
 
 #list tbody td[data-field="status"] button {
@@ -127,4 +128,62 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+#studentmodal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#info {
+  box-shadow: 1px 1px 10px #333;
+  border-radius: 12px;
+  padding: 2em;
+  background-color: #eee;
+  position: relative;
+  border: solid 20px;
+  border-color: #740001;
+  margin: center 0;
+}
+
+#container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+}
+
+#right button {
+  font-size: 0.8em;
+  margin-left: 10px;
+  background-color: #f44336;
+  border-radius: 5px;
+  padding: 0.2em;
+  border: solid 1px;
+}
+
+#left p {
+  border-top: solid 1px;
+}
+
+#right p {
+  background-color: lightgray;
+}
+
+#studentphoto-container {
+  grid-column: 1/3;
+  text-align: center;
+}
+
+#studentphoto {
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  display: block;
 }
