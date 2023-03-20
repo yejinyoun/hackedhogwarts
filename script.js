@@ -156,6 +156,9 @@ function setButton() {
 
   //search button
   document.querySelector("#search").addEventListener("input", searchList);
+
+  //hack button
+  document.querySelector("#logo").addEventListener("click", hackTheSystem);
 }
 
 function searchList() {
