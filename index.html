@@ -54,7 +54,9 @@
     </div>
     <template id="student">
       <tr>
-        <td data-field="photo">PHOTO</td>
+        <!--  <td data-field="photo">PHOTO</td> -->
+        <td data-field="squad">⭐</td>
+        <td data-field="prefect">🏆</td>
         <td data-field="house">HOUSE</td>
         <td data-field="firstName">FIRST NAME</td>
         <td data-field="middleName">MIDDLE NAME</td>
@@ -62,14 +64,14 @@
         <td data-field="lastName">LAST NAME</td>
         <td data-field="gender">GENDER</td>
         <td data-field="blood">BLOOD</td>
-        <td data-field="prefect">🏆</td>
-        <td data-field="squad">⭐</td>
         <td data-field="enrolled">ENROLLED</td>
         <td data-field="expelled">EXPELLED</td>
-        <td data-field="status"><button data-action="status">Expel</button></td>
-        <td data-field="setprefect"><button data-action="setprefect">SELECT PREFECT</button></td>
+        <td data-field="status"><button class="listbutton" data-action="status">Expel</button></td>
+        <td data-field="setprefect">
+          <button class="listbutton" data-action="setprefect">SELECT PREFECT</button>
+        </td>
         <td data-field="setsquad">
-          <button data-action="setsquad">SELECT INQUISITORIAL SQUAD</button>
+          <button class="listbutton" data-action="setsquad">SELECT INQUISITORIAL SQUAD</button>
         </td>
       </tr>
     </template>

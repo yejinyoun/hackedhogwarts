@@ -30,7 +30,7 @@ body {
 }
 
 #list tbody tr td {
-  padding: 0px;
+  padding: 5px;
 }
 
 #list tbody tr:nth-child(odd) {
@@ -39,7 +39,7 @@ body {
 }
 
 #list tbody td[data-field="status"] button {
-  background-color: red;
+  background-color: #f44336;
 }
 
 /* pop-up modal */
@@ -58,6 +58,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 }
 
 #dialog {
@@ -192,4 +193,16 @@ body {
   position: absolute;
   top: 1.5em;
   right: 1.5em;
+}
+
+tbody {
+  font-size: 1.5rem;
+}
+
+td .listbutton {
+  font-size: 0.5em;
+  margin-left: 10px;
+  border-radius: 5px;
+  padding: 0.2em;
+  border: solid 1px;
 }

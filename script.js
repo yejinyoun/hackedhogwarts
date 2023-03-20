@@ -337,29 +337,45 @@ function displayStudent(student) {
 
   // set clone data
 
-  clone.querySelector("[data-field=photo]").innerHTML = `<img src="img/${student.photo}">`;
+  //clone.querySelector("[data-field=photo]").innerHTML = `<img src="img/${student.photo}">`;
   clone.querySelector("[data-field=house]").textContent = student.house;
+  if (student.house === "Gryffindor") {
+    clone.querySelector("[data-field=house]").style.color = "#a6332e";
+  }
+
+  if (student.house === "Slytherin") {
+    clone.querySelector("[data-field=house]").style.color = "#2a623d";
+  }
+
+  if (student.house === "Ravenclaw") {
+    clone.querySelector("[data-field=house]").style.color = "#3c4e91";
+  }
+
+  if (student.house === "Hufflepuff") {
+    clone.querySelector("[data-field=house]").style.color = "#efbc2f";
+  }
+
   clone.querySelector("[data-field=firstName]").textContent = student.firstName;
-  clone.querySelector("[data-field=middleName]").textContent = student.middleName;
-  clone.querySelector("[data-field=nickName]").textContent = student.nickName;
+  clone.querySelector("[data-field=middleName]").textContent = ``;
+  clone.querySelector("[data-field=nickName]").textContent = ``;
   clone.querySelector("[data-field=lastName]").textContent = student.lastName;
-  clone.querySelector("[data-field=gender]").textContent = student.gender;
-  clone.querySelector("[data-field=blood]").textContent = student.blood;
+  clone.querySelector("[data-field=gender]").textContent = ``;
+  clone.querySelector("[data-field=blood]").textContent = ``;
 
   // set expel/enroll status
   if (student.expelled == false) {
-    clone.querySelector("[data-field=enrolled]").textContent = `Enrolled`;
+    clone.querySelector("[data-field=enrolled]").textContent = ``;
     clone.querySelector("[data-field=expelled]").textContent = ``;
 
     //expel button
     clone.querySelector("[data-field=status] button").textContent = `EXPEL`;
   } else {
     clone.querySelector("[data-field=enrolled]").textContent = ``;
-    clone.querySelector("[data-field=expelled]").textContent = `Expelled`;
+    clone.querySelector("[data-field=expelled]").textContent = ``;
 
     // re-enroll button
     clone.querySelector("[data-field=status] button").textContent = `RE-ENROLL`;
-    clone.querySelector("[data-field=status] button").style.backgroundColor = "#4CAF50";
+    clone.querySelector("[data-field=status] button").style.backgroundColor = `#4CAF50`;
   }
 
   // change status (expel)
@@ -384,12 +400,13 @@ function displayStudent(student) {
 
     //select prefect button
     clone.querySelector("[data-field=setprefect] button").textContent = `SELECT PREFECT`;
+    clone.querySelector("[data-field=setprefect] button").style.backgroundColor = `#4CAF50`;
   } else {
-    clone.querySelector("[data-field=prefect]").textContent = `${student.house} Prefect`;
+    clone.querySelector("[data-field=prefect]").textContent = `⭐`;
 
     // remove prefect button button
     clone.querySelector("[data-field=setprefect] button").textContent = `REMOVE PREFECT`;
-    clone.querySelector("[data-field=setprefect] button").style.backgroundColor = "#FFFF00";
+    clone.querySelector("[data-field=setprefect] button").style.backgroundColor = "#f44336";
   }
 
   // change prefect status (set/remove)
@@ -445,14 +462,14 @@ function displayStudent(student) {
     clone.querySelector("[data-field=squad]").textContent = ``;
 
     //select squad button
-    clone.querySelector("[data-field=setsquad] button").textContent = `SELECT INQUISITORIAL SQUAD`;
+    clone.querySelector("[data-field=setsquad] button").textContent = `SELECT SQUAD`;
+    clone.querySelector("[data-field=setsquad] button").style.backgroundColor = `#4CAF50`;
   } else {
-    clone.querySelector("[data-field=squad]").textContent = `Inquisitorial Squad`;
+    clone.querySelector("[data-field=squad]").textContent = `🪄`;
 
     // remove squad button
-    clone.querySelector("[data-field=setsquad] button").textContent = `REMOVE INQUISITORIAL SQUAD`;
-    clone.querySelector("[data-field=setsquad] button").style.backgroundColor = "#000000";
-    clone.querySelector("[data-field=setsquad] button").style.color = "#ffffff";
+    clone.querySelector("[data-field=setsquad] button").textContent = `REMOVE SQUAD`;
+    clone.querySelector("[data-field=setsquad] button").style.backgroundColor = "#f44336";
   }
 
   // change inquisitorial squad status (set/remove)
@@ -489,11 +506,11 @@ function displayStudent(student) {
   }
 
   // close pop-up modal
-  function closeModal() {
+  /*   function closeModal() {
     document.querySelector("#close").addEventListener("click", function addHidden() {
       document.querySelector("#modal").classList.add("hidden");
     });
-  }
+  } */
 
   // HACKTHESYSTEM ON
 
@@ -536,6 +553,8 @@ function displayStudent(student) {
 
   // update clicked student
   clone.querySelector("[data-field=firstName]").addEventListener("click", updatePopup);
+  clone.querySelector("[data-field=lastName]").addEventListener("click", updatePopup);
+
   function updatePopup() {
     displayPopup(student);
   }
@@ -547,6 +566,23 @@ function displayStudent(student) {
     document.querySelector("#studentphoto").src = `img/${clicked.photo}`;
     document.querySelector("[data-modal=firstName]").textContent = clicked.firstName;
     document.querySelector("[data-modal=house]").textContent = clicked.house;
+
+    //house color
+    if (student.house === "Gryffindor") {
+      document.querySelector("#info").style.borderColor = "#a6332e";
+    }
+
+    if (student.house === "Slytherin") {
+      document.querySelector("#info").style.borderColor = "#2a623d";
+    }
+
+    if (student.house === "Ravenclaw") {
+      document.querySelector("#info").style.borderColor = "#3c4e91";
+    }
+
+    if (student.house === "Hufflepuff") {
+      document.querySelector("#info").style.borderColor = "#efbc2f";
+    }
 
     if (clicked.middleName !== undefined) {
       document.querySelector("[data-modal=middleName]").textContent = clicked.middleName;
@@ -576,32 +612,147 @@ function displayStudent(student) {
       document.querySelector("[data-modal=status] button").textContent = `RE-ENROLL`;
       document.querySelector("[data-modal=status] button").style.backgroundColor = `#4CAF50`;
     }
+    // expel button
+    document.querySelector("[data-modal=status] button").addEventListener("click", expelStudent);
 
-    document.querySelector("[data-modal=status] button").addEventListener("click", expelClicked);
-
-    function expelClicked() {
-      expelStudent(clicked);
+    function expelStudent() {
+      {
+        if (clicked.expelled === false) {
+          clicked.expelled = true;
+          clicked.enrolled = false;
+        } else {
+          clicked.expelled = false;
+          clicked.enrolled = true;
+        }
+        document
+          .querySelector("[data-modal=status] button")
+          .removeEventListener("click", expelStudent);
+        console.log(clicked);
+        loadList();
+        displayPopup(clicked);
+      }
     }
-  }
 
-  function expelStudent(student) {
-    if (student.expelled === false) {
-      student.expelled = true;
-      student.enrolled = false;
+    // prefect status and button
+    if (clicked.prefect === false) {
+      document.querySelector("[data-modal=prefect] span").textContent = `Not a Prefect`;
+      document.querySelector("[data-modal=prefect] button").textContent = `SELECT`;
+      document.querySelector("[data-modal=prefect] button").style.backgroundColor = `#4CAF50`;
     } else {
-      student.expelled = false;
-      student.enrolled = true;
+      document.querySelector("[data-modal=prefect] span").textContent = `${clicked.house} Prefect`;
+      document.querySelector("[data-modal=prefect] button").textContent = `REMOVE`;
+      document.querySelector("[data-modal=prefect] button").style.backgroundColor = `#f44336`;
     }
 
-    loadList();
-    displayPopup(student);
+    // prefect button
+
+    document.querySelector("[data-modal=prefect] button").addEventListener("click", prefectStudent);
+
+    function prefectStudent() {
+      if (clicked.prefect == true) {
+        clicked.prefect = false;
+      } else {
+        clicked.prefect = canPrefect(clicked);
+      }
+
+      function canPrefect(student) {
+        const housePrefects = allStudents.filter(isPrefect).filter(isHousePrefect);
+
+        function isPrefect(aStudent) {
+          return aStudent.prefect === true;
+        }
+
+        function isHousePrefect(aPrefect) {
+          return aPrefect.house == student.house;
+        }
+
+        // 2. max 2 students can be prefects in each house
+        if (housePrefects.length < 2) {
+          return true;
+        } else {
+          showAlert();
+          return false;
+        }
+      }
+
+      loadList();
+      document
+        .querySelector("[data-modal=prefect] button")
+        .removeEventListener("click", prefectStudent);
+      displayPopup(clicked);
+
+      console.log(clicked);
+    }
+
+    // squad status and button
+    if (clicked.squad === false) {
+      document.querySelector("[data-modal=squad] span").textContent = `Not a Squad`;
+      document.querySelector("[data-modal=squad] button").textContent = `SELECT`;
+      document.querySelector("[data-modal=squad] button").style.backgroundColor = `#4CAF50`;
+    } else {
+      document.querySelector("[data-modal=squad] span").textContent = `Member of Squad`;
+      document.querySelector("[data-modal=squad] button").textContent = `REMOVE`;
+      document.querySelector("[data-modal=squad] button").style.backgroundColor = `#f44336`;
+    }
+
+    document.querySelector("[data-modal=squad] button").addEventListener("click", squadStudent);
+
+    function squadStudent() {
+      {
+        if (clicked.squad === true) {
+          clicked.squad = false;
+        } else {
+          if (clicked.blood === "Pure Blood") {
+            clicked.squad = true;
+          } else if (clicked.house === "Slytherin") {
+            clicked.squad = true;
+          } else {
+            clicked.squad = false;
+            showAlert2();
+          }
+        }
+
+        document
+          .querySelector("[data-modal=squad] button")
+          .removeEventListener("click", squadStudent);
+        console.log(clicked);
+        loadList();
+        displayPopup(clicked);
+      }
+    }
   }
 
   function closeStudent() {
     document.querySelector("#studentmodal").classList.add("hidden");
+    document.querySelector("#closestudent").removeEventListener("click", closeStudent);
   }
 
   document.querySelector("#list tbody").appendChild(clone);
+}
+
+function showAlert() {
+  document.querySelector("#modal").classList.remove("hidden");
+  document.querySelector("#modal h2").textContent =
+    "You have already selected two prefects for this house!";
+  document.querySelector("#modal p").textContent =
+    "Please remove a selection before adding another.";
+
+  closeModal();
+}
+
+function showAlert2() {
+  document.querySelector("#modal").classList.remove("hidden");
+  document.querySelector("#modal h2").textContent =
+    "Inquisitorial Squad is limited to Pure Blood or Slytherin students!";
+  document.querySelector("#modal p").textContent = "Please select a valid student.";
+
+  closeModal();
+}
+
+function closeModal() {
+  document.querySelector("#close").addEventListener("click", function addHidden() {
+    document.querySelector("#modal").classList.add("hidden");
+  });
 }
 
 function hackTheSystem() {
