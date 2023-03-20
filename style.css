@@ -187,3 +187,9 @@ body {
   margin: 0 auto;
   display: block;
 }
+
+#closestudent {
+  position: absolute;
+  top: 1.5em;
+  right: 1.5em;
+}

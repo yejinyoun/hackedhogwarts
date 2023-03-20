@@ -534,6 +534,73 @@ function displayStudent(student) {
     }
   }
 
+  // update clicked student
+  clone.querySelector("[data-field=firstName]").addEventListener("click", updatePopup);
+  function updatePopup() {
+    displayPopup(student);
+  }
+  function displayPopup(clicked) {
+    document.querySelector("#studentmodal").classList.remove("hidden");
+    document.querySelector("#closestudent").addEventListener("click", closeStudent);
+
+    //set data modal
+    document.querySelector("#studentphoto").src = `img/${clicked.photo}`;
+    document.querySelector("[data-modal=firstName]").textContent = clicked.firstName;
+    document.querySelector("[data-modal=house]").textContent = clicked.house;
+
+    if (clicked.middleName !== undefined) {
+      document.querySelector("[data-modal=middleName]").textContent = clicked.middleName;
+    } else {
+      document.querySelector("[data-modal=middleName]").textContent = `-`;
+    }
+
+    if (clicked.nickName !== undefined) {
+      document.querySelector("[data-modal=nickName]").textContent = clicked.nickName;
+    } else {
+      document.querySelector("[data-modal=nickName]").textContent = `-`;
+    }
+
+    if (clicked.lastName !== undefined) {
+      document.querySelector("[data-modal=lastName]").textContent = clicked.lastName;
+    } else {
+      document.querySelector("[data-modal=lastName]").textContent = `-`;
+    }
+
+    //expel status and button
+    if (clicked.expelled === false) {
+      document.querySelector("[data-modal=status] span").textContent = `Enrolled`;
+      document.querySelector("[data-modal=status] button").textContent = `EXPEL`;
+      document.querySelector("[data-modal=status] button").style.backgroundColor = `#f44336`;
+    } else {
+      document.querySelector("[data-modal=status] span").textContent = `Expelled`;
+      document.querySelector("[data-modal=status] button").textContent = `RE-ENROLL`;
+      document.querySelector("[data-modal=status] button").style.backgroundColor = `#4CAF50`;
+    }
+
+    document.querySelector("[data-modal=status] button").addEventListener("click", expelClicked);
+
+    function expelClicked() {
+      expelStudent(clicked);
+    }
+  }
+
+  function expelStudent(student) {
+    if (student.expelled === false) {
+      student.expelled = true;
+      student.enrolled = false;
+    } else {
+      student.expelled = false;
+      student.enrolled = true;
+    }
+
+    loadList();
+    displayPopup(student);
+  }
+
+  function closeStudent() {
+    document.querySelector("#studentmodal").classList.add("hidden");
+  }
+
   document.querySelector("#list tbody").appendChild(clone);
 }
 

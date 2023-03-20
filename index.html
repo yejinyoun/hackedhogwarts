@@ -86,9 +86,9 @@
 
     <!-- modal student -->
 
-    <div id="studentmodal">
+    <div id="studentmodal" class="hidden">
       <div id="info">
-        <button id="close">X</button>
+        <button id="closestudent">X</button>
         <img id="studentphoto" src="img/me.png" />
         <div id="container">
           <div id="left">
@@ -109,9 +109,15 @@
             <p data-modal="lastName">Potter</p>
             <p data-modal="blood">Half Blood</p>
             <p data-modal="house">Gryffindor</p>
-            <p data-modal="status">Enrolled<button data-modal="setstatus">EXPEL</button></p>
-            <p data-modal="prefect">Not A Prefect<button data-modal="setprefect">SELECT</button></p>
-            <p data-modal="squad">Not A Squad<button data-modal="setsquad">SELECT</button></p>
+            <p data-modal="status">
+              <span>Enrolled</span><button data-modal="setstatus">EXPEL</button>
+            </p>
+            <p data-modal="prefect">
+              <span>Not A Prefect</span><button data-modal="setprefect">SELECT</button>
+            </p>
+            <p data-modal="squad">
+              <span>Not A Squad</span><button data-modal="setsquad">SELECT</button>
+            </p>
           </div>
         </div>
       </div>
